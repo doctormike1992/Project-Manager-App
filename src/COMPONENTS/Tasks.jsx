@@ -12,7 +12,7 @@ export default function Tasks({fun}) {
   
   let cssClassNew = cssClass + " bg-stone-500 text-stone-100";
  
-  
+  console.log(selectTask)
 
   return (
     <>
@@ -20,7 +20,7 @@ export default function Tasks({fun}) {
         { newTask.map((task) => {
           return (
             <p key={task.id}>
-              <button  onClick={() =>fun(task.id)} className={selectTask?.id === task.id ? cssClassNew : cssClass}>{task.title}</button>
+              <button  onClick={() =>fun(task.id)} className={selectTask === task.id ? cssClassNew : cssClass}>{task.title}</button>
             </p>
           );
         })}

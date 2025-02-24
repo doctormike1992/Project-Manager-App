@@ -8,29 +8,17 @@ import ExistingTask from "./COMPONENTS/ExistingTask";
 function App() {
   const [newTask, setNewTask] = useState([]);
   const [isSelected, setIsSelected] = useState("home");
-  const [selectTask, setSelectTask] = useState('');
+  const [selectTask, setSelectTask] = useState();
 
-  const tasks = {
-    newTask,
-    setNewTask,
-    setIsSelected,
-    selectTask,
-    setSelectTask,
-  };
-function handleSelectTask(id) {
   
-  const existing = newTask.find((task) => task.id === id);
 
-  if (existing) {
-     setSelectTask(existing);
-    setIsSelected("existing");
+  function handleSelectTask(id) {
+    setSelectTask(id);
+    setIsSelected('existing')
    
-  } else {
-    setIsSelected("home");
-    setSelectTask('');
-    
   }
-}
+  
+
 
 
   const content = () => {
@@ -39,9 +27,19 @@ function handleSelectTask(id) {
     } else if (isSelected === "newTask") {
       return <NewTask />;
     } else if (isSelected === "existing") {
-      return <ExistingTask />;
+      return <ExistingTask  />;
     }
   };
+
+
+  const tasks = {
+    newTask,
+    setNewTask,
+    setIsSelected,
+    selectTask,
+    setSelectTask,
+  };
+
   return (
     <>
       <TaskContext.Provider value={tasks}>

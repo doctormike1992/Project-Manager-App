@@ -1,4 +1,4 @@
-// import Tasks from "./Tasks";
+import Tasks from "./Tasks";
 import { useContext } from "react";
 import { TaskContext } from "./TaskContext";
 
@@ -6,10 +6,7 @@ import { TaskContext } from "./TaskContext";
 export default function SideBar({fun}) {
   const task = useContext(TaskContext);
 
-  let cssClass =
-    "cursor-pointer hover:bg-stone-600 md:px-7 rounded py-3 mt-1 break-words w-full ";
-
-  let cssClassNew = cssClass + " bg-stone-500 text-stone-100";
+ 
 
   return (
     <div className="flex bg-stone-700 md:w-1/5 h-full text-center flex-col pt-47 mt-10 rounded-r-2xl ">
@@ -22,20 +19,7 @@ export default function SideBar({fun}) {
       >
         + New Project
       </button>
-      <div className="mt-5 text-stone-100 ">
-        {task.newTask.map((task) => {
-          return (
-            <p key={task.id}>
-              <button
-                onClick={() => fun(task.id)}
-                className={task.selectTask?.id === task.id ? cssClassNew : cssClass}
-              >
-                {task.title}
-              </button>
-            </p>
-          );
-        })}
-      </div>
+     {task.newTask.length > 0 && <Tasks fun={fun} />}
     </div>
   );
 }
