@@ -3,14 +3,10 @@ import { TaskContext } from "./TaskContext";
 import ExtraTask from "./ExtraTask";
 import Inputs from "./Inputs";
 
-
 export default function ExistingTask() {
-  
   const { selectTask, setNewTask, newTask, setIsSelected, setSelectTask } =
     useContext(TaskContext);
   const extraRef = useRef();
-
-  
 
   useEffect(() => {
     extraRef.current.value = "";
@@ -19,10 +15,13 @@ export default function ExistingTask() {
   const existing = newTask.find((task) => task.id === selectTask);
 
   if (!existing) {
-    return <p>Task not found!</p>; 
+    return <p>Task not found!</p>;
   }
 
   function hundleExtraTask() {
+    if (extraRef.current.value === "") {
+      return;
+    }
     setNewTask((prev) =>
       prev.map((task) =>
         task.id === selectTask
@@ -36,17 +35,15 @@ export default function ExistingTask() {
     setNewTask((prevTasks) => {
       const updatedTasks = prevTasks.filter((task) => task.id !== selectTask);
 
-      setSelectTask(selectTask );
+      setSelectTask(selectTask);
       setIsSelected("home");
 
       return updatedTasks;
     });
   }
 
- 
   const newExtra = existing.extra;
   function hundleDeleteTask(index) {
-    
     setNewTask((prev) =>
       prev.map((task) =>
         task.id === selectTask
@@ -58,8 +55,6 @@ export default function ExistingTask() {
       )
     );
   }
-
-
 
   let cssClass =
     "bg-stone-100 border-1 outline-0  px-4 py-2 shadow-sm border-stone-300 ";
